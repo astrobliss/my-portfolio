@@ -23,6 +23,26 @@ function addRandomGreeting() {
   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
   // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+  const textContainer = document.getElementById('text-container');
+  textContainer.innerText = greeting;
+}
+
+/**
+ * Adds a random greeting to the page.
+ */
+function addRandomQuote() {
+  const quotes = [
+        "A ship in port is safe, but that's not what ships are built for.",
+        "I don't know where we're going, but we're making good time.",
+        "Sometimes you never realize the value of a moment until it becomes a memory.",
+        "And now that you don't have to be perfect, you can be good.",
+        "Holding a grudge is like drinking poison and expecting the other person to die."
+    ];
+
+  // Pick a random greeting.
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  // Add it to the page.
+  const textContainer = document.getElementById('text-container');
+  textContainer.innerText = quote;
 }
