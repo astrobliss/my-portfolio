@@ -13,6 +13,15 @@
 // limitations under the License.
 
 /**
+ * @param array, a non-empty array
+ * @return a random element of the input array
+ */
+function getRandomElement(array) {
+  console.assert(array.length==0, "getRandomElement cannot be used on empty array");
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+/**
  * Adds a random greeting to the page.
  */
 function addRandomGreeting() {
@@ -20,7 +29,7 @@ function addRandomGreeting() {
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
   // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const greeting = getRandomElement(greetings);
 
   // Add it to the page.
   const textContainer = document.getElementById('text-container');
@@ -28,7 +37,7 @@ function addRandomGreeting() {
 }
 
 /**
- * Adds a random greeting to the page.
+ * Adds a random quote to the page.
  */
 function addRandomQuote() {
   const quotes = [
@@ -40,9 +49,28 @@ function addRandomQuote() {
     ];
 
   // Pick a random greeting.
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  const quote = getRandomElement(quotes);
 
   // Add it to the page.
   const textContainer = document.getElementById('text-container');
   textContainer.innerText = quote;
+}
+
+/**
+ * Adds a random project link to the page.
+ */
+function addRandomProject() {
+  const links = [
+    {description: "A playable pong game! You can't win though", url: "https://astrobliss.github.io/pong/"},
+    {description:"An experiment where optical illusions form from monitor refresh rate. Works on mobile too!", url: "https://astrobliss.github.io/fall/"},
+    {description:"The Repository of a rails project I was on", url: "https://github.com/theananthanarayan/unpaid_interns"},
+    {description:"The Repository of a react project I was on", url: "https://github.com/astrobliss/Cadabra"},
+    {description:"A website that makes trump rap, entertainment purposes only", url: "https://astrobliss.github.io/trump-pad/"}
+  ];
+
+  const link = getRandomElement(links);
+
+  linkElement = document.getElementById('link-container');
+  linkElement.text = link.description;
+  linkElement.href = link.url;
 }

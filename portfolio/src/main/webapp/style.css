@@ -2,6 +2,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+  font-family: 'Source Serif Pro';
 }
 
 body {
@@ -14,4 +15,12 @@ body {
 
 #reggie-photo {
   border-radius: 50%;
+  width: 500px
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <title>Reginald Frank</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Serif+Pro&display=swap" rel="stylesheet">
     <script src="script.js"></script>
   </head>
   <body>
     <div id="content">
-      <img id="reggie-photo" src="images/Reggie.jpg" alt="A photo of me!" width="500px" height="500px">
+      <img id="reggie-photo" src="images/Reggie.jpg" alt="A photo of me!" class="center">
       <h1>Hey, I'm Reginald Frank</h1>
       <h2>an ever improving software engineer and distributed computing researcher.</h2>
+      <p>Currently I'm a Senior at Texas A&amp;M University getting
+          my Bachelors in Computer Science and Mathamatics. I've published two
+          brief papers under my current advisor, Dr. Jennifer Welch in the ACM's
+          <a href="https://doi.org/10.1145/3293611.3331580" target="_blank">PODC'19</a>
+          Conference and the
+          <a href="https://doi.org/10.4230/LIPIcs.DISC.2018.47" target="_blank">DISC'18</a> Conference.
+          I completed an internship with Amazon in 2019 where I designed and impliemented an automated fault
+          tolerant Native AWS service to serverlessly transform and stream a sustained terabit of data per
+          second to zonally consolidated data warehouses.
       <p>Click here to get a random message:</p>
-      <button onclick="addRandomQuote()">Hello</button>
-      <div id="text-container"></div>
+      <button onclick="addRandomProject()">Check out a Project!</button>
+      <div id="text-container"><a id="link-container"></a></div>
     </div>
   </body>
 </html>
