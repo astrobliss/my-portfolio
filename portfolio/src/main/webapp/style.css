@@ -2,8 +2,25 @@
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+  font-family: 'Source Serif Pro';
+}
+
+body {
+  background-color: lightblue;
 }
 
 #greeting-container {
   margin-top: 20px;
+}
+
+#reggie-photo {
+  border-radius: 50%;
+  width: 500px
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
