@@ -74,3 +74,9 @@ function addRandomProject() {
   linkElement.text = link.description;
   linkElement.href = link.url;
 }
+
+function appendData() {
+    fetch("/data").then( response => response.text() ).then ( data => {
+        document.body.innerHTML += data;
+    });
+}
