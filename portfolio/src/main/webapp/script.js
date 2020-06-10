@@ -75,8 +75,21 @@ function addRandomProject() {
   linkElement.href = link.url;
 }
 
-function appendData() {
-    fetch("/data").then( response => response.text() ).then ( data => {
-        document.body.innerHTML += data;
-    });
+/**
+ * Adds all comments to the page
+ */
+async function addComments() {
+    response = await fetch('/data');
+    comments = await response.json();
+    comments.forEach(addComment);
+}
+
+/**
+ * Adds one comment to the page
+ */
+function addComment(commentText) {
+    commentElement = document.createElement("p");
+    commentElement.innerText = commentText;
+    const commentContainer = document.getElementById('comments');
+    commentContainer.appendChild(commentElement);
 }
