@@ -56,10 +56,12 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = request.getParameter("comment-text");
     if(comment != null){
-      comments.add(comment);
+      long timestamp = System.currentTimeMillis();
       Entity commentEn = new Entity("Comment");
       commentEn.setProperty("text",comment);
+      commentEn.setProperty("timestamp",timestamp);
       datastore.put(commentEn);
+      comments.add(comment);
     }
     response.sendRedirect("/index.html");
   }
