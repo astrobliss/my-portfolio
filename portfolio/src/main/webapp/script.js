@@ -74,3 +74,12 @@ function addRandomProject() {
   linkElement.text = link.description;
   linkElement.href = link.url;
 }
+
+/**
+ * Fetches HelloWorld html element from the serverlet and appends it to the page
+ */
+function ServerletHelloWorld(serverlet) {
+  fetch(serverlet).then( response => response.text() ).then ( data => {
+    document.body.innerHTML += data;
+  });
+}
