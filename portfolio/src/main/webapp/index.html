@@ -25,6 +25,13 @@
       <button onclick="addRandomProject()">Check out a Project!</button>
       <div id="text-container"><a id="link-container"></a></div>
     </div>
-    <div id="comments" class="center"><h2>Comments:<h2></div>
+    <div id="comments" class="center">
+      <h2>Comments:</h2>
+      <form action="/data" method="POST">
+        <textarea name="comment-text">Enter a comment!</textarea>
+        <br/><br/>
+        <input type="submit" value="Post Comment!"/>
+      </form>
+    </div>
   </body>
 </html>
