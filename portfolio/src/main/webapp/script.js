@@ -79,9 +79,9 @@ function addRandomProject() {
  * Adds all comments to the page
  */
 async function addComments() {
-    response = await fetch('/data');
-    comments = await response.json();
-    comments.forEach(addComment);
+  response = await fetch('/data');
+  comments = await response.json();
+  comments.forEach(addComment);
 }
 
 /**
