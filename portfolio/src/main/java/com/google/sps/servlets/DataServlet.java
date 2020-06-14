@@ -30,26 +30,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Locally stores a List of Comment Strings which can be Read on GET or Appended to on POST
+ * Uses Datastore to store Comment Objects which can be Read on GET or Added to on POST
  */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  private static final Gson gson = new Gson();
-  private static final List<String> comments = new ArrayList<>();
+  private static Gson gson = new Gson();
 
   /**
-   * Gives response containing a single Json List with all stored comments
+   * Gives response containing a single Json List with all stored comments from datastore
+   * List sorted from oldest to newest comment
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    List<String> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      comments.add((String) entity.getProperty("text"));
+    }
     String json = gson.toJson(comments);
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
 
   /**
-   * Iff request has a non-null comment-text parameter, store the parameter's string in the local comment list
+   * Iff request has a non-null comment-text parameter,
+   *   then create and store the parameter's String as a Datastore Comment Object
    * Always redirect to index.html
    */
   @Override
@@ -61,7 +69,6 @@ public class DataServlet extends HttpServlet {
       commentEn.setProperty("text",comment);
       commentEn.setProperty("timestamp",timestamp);
       datastore.put(commentEn);
-      comments.add(comment);
     }
     response.sendRedirect("/index.html");
   }
