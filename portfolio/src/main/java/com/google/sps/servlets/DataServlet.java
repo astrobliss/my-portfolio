@@ -24,13 +24,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Serves hardcoded Comment Strings on get
+ * Locally stores a List of Comment Strings which can be Read on GET or Appended to on POST
  */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  private static Gson gson = new Gson();
-  private final List<String> comments = new ArrayList<>();
+  private static final Gson gson = new Gson();
+  private static final List<String> comments = new ArrayList<>();
 
+  /**
+   * Gives response containing a single Json List with all stored comments
+   */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String json = gson.toJson(comments);
@@ -38,11 +41,15 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
-    @Override
+  /**
+   * Iff request has a non-null comment-text parameter, store the parameter's string in the local comment list
+   * Always redirect to index.html
+   */
+  @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = request.getParameter("comment-text");
     if(comment != null){
-        comments.add(comment);
+      comments.add(comment);
     }
     response.sendRedirect("/index.html");
   }

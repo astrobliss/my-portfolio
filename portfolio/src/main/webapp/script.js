@@ -88,9 +88,9 @@ async function addComments() {
  * Adds one comment to the page
  */
 function addComment(commentText) {
-    commentElement = document.createElement("p");
-    commentElement.innerText = commentText;
-    const commentContainer = document.getElementById('comments');
-    commentContainer.appendChild(commentElement);
-    commentContainer.appendChild(document.createElement("hr"));
+  commentElement = document.createElement("p");
+  commentElement.innerText = commentText;
+  const commentContainer = document.getElementById('comments');
+  commentContainer.appendChild(commentElement);
+  commentContainer.appendChild(document.createElement("hr"));
 }
