@@ -50,6 +50,7 @@ public class DataServlet extends HttpServlet {
 
   /**
    * Iff request has a non-null comment-text parameter, store the parameter's string in the local comment list
+   *   and make a comment object for it in DataStore
    * Always redirect to index.html
    */
   @Override
