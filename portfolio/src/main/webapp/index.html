@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Serif+Pro&display=swap" rel="stylesheet">
     <script src="script.js"></script>
   </head>
-  <body onload="ServerletHelloWorld('/data')">
+  <body onload="addComments()">
     <div id="content">
       <img id="reggie-photo" src="images/Reggie.jpg" alt="A photo of me!" class="center">
       <h1>Hey, I'm Reginald Frank</h1>
@@ -24,6 +24,14 @@
       <p>Click here to get a random message:</p>
       <button onclick="addRandomProject()">Check out a Project!</button>
       <div id="text-container"><a id="link-container"></a></div>
+    </div>
+    <div id="comments" class="center">
+      <h2>Comments:</h2>
+      <form action="/data" method="POST">
+        <textarea name="comment-text">Enter a comment!</textarea>
+        <br/><br/>
+        <input type="submit" value="Post Comment!"/>
+      </form>
     </div>
   </body>
 </html>

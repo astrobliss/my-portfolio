@@ -76,10 +76,21 @@ function addRandomProject() {
 }
 
 /**
- * Fetches HelloWorld html element from the serverlet and appends it to the page
+ * Adds all comments to the page
  */
-function ServerletHelloWorld(serverlet) {
-  fetch(serverlet).then( response => response.text() ).then ( data => {
-    document.body.innerHTML += data;
-  });
+async function addComments() {
+  response = await fetch('/data');
+  comments = await response.json();
+  comments.forEach(addComment);
+}
+
+/**
+ * Adds one comment to the page
+ */
+function addComment(commentText) {
+  commentElement = document.createElement("p");
+  commentElement.innerText = commentText;
+  const commentContainer = document.getElementById('comments');
+  commentContainer.appendChild(commentElement);
+  commentContainer.appendChild(document.createElement("hr"));
 }
