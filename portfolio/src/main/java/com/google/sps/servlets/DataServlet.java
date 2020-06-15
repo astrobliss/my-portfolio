@@ -43,7 +43,7 @@ public class DataServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    Query query = new Query("Comment").addSort("timestampMs", SortDirection.ASCENDING);
     PreparedQuery results = datastore.prepare(query);
 
     List<String> comments = new ArrayList<>();
@@ -64,10 +64,10 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = request.getParameter("comment-text");
     if(comment != null){
-      long timestamp = System.currentTimeMillis();
+      long timestampMs = System.currentTimeMillis();
       Entity commentEn = new Entity("Comment");
       commentEn.setProperty("text",comment);
-      commentEn.setProperty("timestamp",timestamp);
+      commentEn.setProperty("timestampMs",timestampMs);
       datastore.put(commentEn);
     }
     response.sendRedirect("/index.html");
