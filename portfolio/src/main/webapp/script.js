@@ -92,4 +92,5 @@ function addComment(commentText) {
   commentElement.innerText = commentText;
   const commentContainer = document.getElementById('comments');
   commentContainer.appendChild(commentElement);
+  commentContainer.appendChild(document.createElement("hr"));
 }
