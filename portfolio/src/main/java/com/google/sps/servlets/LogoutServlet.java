@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Uses Datastore to store Comment Objects which can be Read on GET or Added to on POST
+ * Uses UserService to logout the current user and foward them to a desired page
  */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
