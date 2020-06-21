@@ -13,27 +13,45 @@
 // limitations under the License.
 
 /**
+ * Fetches current user from UserInformationServlet and stores it in getCurrentUser.currentUser
+ * If the user is not logged in the fetch will have a 400 response code, and the user stored will be null
+ */
+async function initGetCurrentUser() {
+  response = await fetch('/userInfo');
+  if(!response.ok){
+    getCurrentUser.currentUser = null;
+    getCurrentUser.initalized = true;
+  } else {
+    user = await response.json();
+    getCurrentUser.currentUser = user;
+    getCurrentUser.initalized = true;
+  }
+}
+
+/**
+ * Returns the Current Logged in user object
+ * If no user is logged in, return null
+ */
+async function getCurrentUser() {
+  if(getCurrentUser.initalized === true){
+    return getCurrentUser.currentUser;
+  }
+  await initGetCurrentUser();
+  return getCurrentUser.currentUser;
+}
+
+async function isUserLoggedIn() {
+  currentUser = await getCurrentUser();
+  return currentUser != null;
+}
+
+/**
  * @param array, a non-empty array
  * @return a random element of the input array
  */
 function getRandomElement(array) {
-  console.assert(array.length==0, "getRandomElement cannot be used on empty array");
+  console.assert(array.length === 0, "getRandomElement cannot be used on empty array");
   return array[Math.floor(Math.random() * array.length)];
-}
-
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = getRandomElement(greetings);
-
-  // Add it to the page.
-  const textContainer = document.getElementById('text-container');
-  textContainer.innerText = greeting;
 }
 
 /**
@@ -67,9 +85,7 @@ function addRandomProject() {
     {description:"The Repository of a react project I was on", url: "https://github.com/astrobliss/Cadabra"},
     {description:"A website that makes trump rap, entertainment purposes only", url: "https://astrobliss.github.io/trump-pad/"}
   ];
-
   const link = getRandomElement(links);
-
   linkElement = document.getElementById('link-container');
   linkElement.text = link.description;
   linkElement.href = link.url;
@@ -93,4 +109,22 @@ function addComment(commentText) {
   const commentContainer = document.getElementById('comments');
   commentContainer.appendChild(commentElement);
   commentContainer.appendChild(document.createElement("hr"));
+}
+
+/**
+ * Shows all HTML elements of the given Class
+ */
+function showClass(className) {
+  classElements = document.getElementsByClassName(className);
+  for(i = 0; i < classElements["length"]; i++){
+    classElements[i].style.display = "block";
+  }
+}
+
+async function showLoginBasedContent() {
+  if(await isUserLoggedIn()) {
+    showClass("show-logged-in");
+  } else {
+    showClass("show-logged-out");
+  }
 }

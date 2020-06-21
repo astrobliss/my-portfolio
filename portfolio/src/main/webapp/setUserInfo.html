@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reginald Frank</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Serif+Pro&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+  </head>
+  <body onload="showLoginBasedContent();">
+    <div id="user-create-content" class="center show-logged-out">
+      <h2>Create your Account!</h2>
+      <p>First <a href="/login?destination-url=/setUserInfo.html">Login</a> if you've never done so before.
+      <p> Then just enter your information!
+      <form action="/userInfo" method="POST">
+        <br/><br/>
+        <b>Display Name:</b><input type="text" name="display-name">
+        <br/><br/>
+        <input type="submit" value="Create Account!"/>
+      </form>
+    </div>
+    <div id="user-update-content" class="center show-logged-in">
+      <h2>Update your Account!</h2>
+      <p>Change what you want and click Update Info!
+      <form action="/userInfo" method="POST">
+        <b>Email: </b><input type="text" name="email">
+        <br/><br/>
+        <b>Display Name:</b><input type="text" name="display-name">
+        <br/><br/>
+        <input type="submit" value="Update Info!"/>
+      </form>
+    </div>
+  </body>
+</html>
