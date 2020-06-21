@@ -41,6 +41,7 @@ public class DataServlet extends HttpServlet {
    * Gives response containing a single Json List with all stored comments from datastore
    * List sorted from oldest to newest comment
    */
+   //TODO return timestamp and author alongside comment text
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);

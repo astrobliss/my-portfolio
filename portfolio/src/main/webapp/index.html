@@ -26,6 +26,14 @@
       <div id="text-container"><a id="link-container"></a></div>
     </div>
     <div id="comments" class="center">
+      <h2>Change User Data:</h2>
+      <form action="/userInfo" method="POST">
+        <input type="text" name="displayName">astro</input>
+        <br/><br/>
+        <input type="submit" value="Post Comment!"/>
+      </form>
+    </div>
+    <div id="comments" class="center">
       <h2>Comments:</h2>
       <form action="/data" method="POST">
         <textarea name="comment-text">Enter a comment!</textarea>
