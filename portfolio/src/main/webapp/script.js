@@ -14,16 +14,16 @@
 
 /**
  * Fetches current user from UserInformationServlet and stores it in getCurrentUser.currentUser
- * If the user is not logged in the fetch will have a 400 response code, and the user stored will be null
+ * If the user is not logged in the fetch's status will not be ok, and the user stored will be null
  */
 async function initGetCurrentUser() {
   response = await fetch('/userInfo');
-  if(!response.ok){
-    getCurrentUser.currentUser = null;
-    getCurrentUser.initalized = true;
-  } else {
+  if(response.ok) {
     user = await response.json();
     getCurrentUser.currentUser = user;
+    getCurrentUser.initalized = true;
+  } else {
+    getCurrentUser.currentUser = null;
     getCurrentUser.initalized = true;
   }
 }
@@ -103,12 +103,24 @@ async function addComments() {
 /**
  * Adds one comment to the page
  */
-function addComment(commentText) {
-  commentElement = document.createElement("p");
-  commentElement.innerText = commentText;
+function addComment(comment) {
   const commentContainer = document.getElementById('comments');
-  commentContainer.appendChild(commentElement);
+  commentTextElement = document.createElement("p");
+  commentMetaDataElement = document.createElement("p");
+  commentMetaDataElement.className = "small-text";
+
+  commentMetaDataElement.innerText = getCommentMetaData(comment);
+  commentTextElement.innerText = comment.commentText;
+  commentContainer.appendChild(commentTextElement);
+  commentContainer.appendChild(commentMetaDataElement);
   commentContainer.appendChild(document.createElement("hr"));
+}
+
+function getCommentMetaData(comment) {
+  timestamp = new Date(comment.timestampMs);
+  authorName = comment.authorName;
+  return `${authorName}: ${timestamp.getMonth()}/${timestamp.getDate()}/${timestamp.getFullYear()} `
+      + `${timestamp.getHours()}:${timestamp.getMinutes()}`;
 }
 
 /**

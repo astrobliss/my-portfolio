@@ -31,3 +31,9 @@ body {
 .show-logged-out {
   display: none;
 }
+
+.small-text {
+  color: dimgrey;
+  font-size: smaller;
+  font-style: italic;
+}

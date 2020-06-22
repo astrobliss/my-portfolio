@@ -118,7 +118,7 @@ public class UserInformationServlet extends HttpServlet {
   /**
    * Queries Datastore for a User Entity with the given Id, returns null if no match
    */
-  private Entity getUserEntity(String userId) {
+  public static Entity getUserEntity(String userId) {
     Query query =
         new Query("User")
             .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, userId));
