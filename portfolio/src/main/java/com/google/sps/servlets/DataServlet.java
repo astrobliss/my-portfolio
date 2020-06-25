@@ -21,6 +21,8 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
+import com.google.sps.utils.Requests;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +64,8 @@ public class DataServlet extends HttpServlet {
    */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = request.getParameter("comment-text");
-    if(comment != null){
+    if(Requests.hasParameterValue(request, "comment-text")) {
+      String comment = request.getParameter("comment-text");
       long timestamp = System.currentTimeMillis();
       Entity commentEn = new Entity("Comment");
       commentEn.setProperty("text",comment);
