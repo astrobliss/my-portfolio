@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Uses UserService and DataStore to allow Creation, Reading, and Updating of User objects
  * JSON is sent on GET, on POST create a new user object or update individual parameters
+ * By design, user information is accessible by anyone, do not store sensitive information
  */
 @WebServlet("/userInfo")
 public class UserInformationServlet extends HttpServlet {
@@ -94,7 +95,7 @@ public class UserInformationServlet extends HttpServlet {
       // Create and store a new entity
       userEntity = new Entity("User", userId);
       String userEmail = userService.getCurrentUser().getEmail();
-      for(String propertyName: userPropertyNames) {
+      for(String propertyName : userPropertyNames) {
         String propertyValue = getRequestParameter(propertyName, request, "");
         userEntity.setProperty(propertyName, propertyValue);
       }
@@ -102,7 +103,7 @@ public class UserInformationServlet extends HttpServlet {
       userEntity.setProperty("email", userEmail); // email shouldn't be changed on create
     } else {
       // Update present parameters
-      for(String propertyName: userPropertyNames) {
+      for(String propertyName : userPropertyNames) {
         String currentPropertyValue = "";
         if(userEntity.hasProperty(propertyName)){
           currentPropertyValue = (String) userEntity.getProperty(propertyName);
