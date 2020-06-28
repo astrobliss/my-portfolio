@@ -74,13 +74,17 @@ public class DataServlet extends HttpServlet {
    * Iff request has a non-null comment-text parameter,
    *   then create and store the parameter's String as a Datastore Comment Object
    * Always redirect to index.html
-   * If poster not logged in, return a HTTP 400 error code
+   * If poster not logged in, return a HTTP 403 error code as they must be logged in to comment
+   * If comment contains no text return a HTTP 400 error code as empty comments aren't allowed
    */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     if(userService.isUserLoggedIn()) {
-      String comment = request.getParameter("comment-text");
-      if (comment != null) {
+      String comment = Requests.getParameter(request, "comment-text", "");
+      if ("".equals(comment)) {
+        response.setStatus(400);
+      } else {
+        // User is logged in and posting a non-empty comment, store their requested comment
         String authorId = userService.getCurrentUser().getUserId();
         long timestampMs = System.currentTimeMillis();
         Entity commentEn = new Entity("Comment");
@@ -90,7 +94,7 @@ public class DataServlet extends HttpServlet {
         datastore.put(commentEn);
       }
     } else {
-      response.setStatus(400);
+      response.setStatus(403);
     }
     response.sendRedirect("/index.html");
   }
