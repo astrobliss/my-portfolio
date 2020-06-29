@@ -101,12 +101,24 @@ async function addComments() {
 /**
  * Adds one comment to the page
  */
-function addComment(commentText) {
-  commentElement = document.createElement("p");
-  commentElement.innerText = commentText;
+function addComment(comment) {
   const commentContainer = document.getElementById('comments');
-  commentContainer.appendChild(commentElement);
+  commentTextElement = document.createElement("p");
+  commentMetaDataElement = document.createElement("p");
+  commentMetaDataElement.className = "small-text";
+
+  commentMetaDataElement.innerText = getCommentMetaData(comment);
+  commentTextElement.innerText = comment.commentText;
+  commentContainer.appendChild(commentTextElement);
+  commentContainer.appendChild(commentMetaDataElement);
   commentContainer.appendChild(document.createElement("hr"));
+}
+
+function getCommentMetaData(comment) {
+  timestamp = new Date(comment.timestampMs);
+  authorName = comment.authorName;
+  return `${authorName}: ${timestamp.getMonth()}/${timestamp.getDate()}/${timestamp.getFullYear()} `
+      + `${timestamp.getHours()}:${timestamp.getMinutes()}`;
 }
 
 /**
