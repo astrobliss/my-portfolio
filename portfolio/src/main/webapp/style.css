@@ -1,12 +1,12 @@
+body {
+  background-color: lightblue;
+}
+
 #content {
   font-family: 'Source Serif Pro';
   margin-left: auto;
   margin-right: auto;
   width: 650px;
-}
-
-body {
-  background-color: lightblue;
 }
 
 #greeting-container {
@@ -23,4 +23,17 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+.show-logged-in {
+  display: none;
+}
+
+.show-logged-out {
+  display: none;
+}
+
+.small-text {
+  color: dimgrey;
+  font-size: smaller;
+  font-style: italic;
 }
