@@ -13,18 +13,17 @@
 // limitations under the License.
 
 /**
- * Fetches current user from UserInformationServlet and stores it in getCurrentUser.currentUser
- * If the user is not logged in the fetch's status will not be ok, and the user stored will be null
+ * Defines getCurrentUser.cachedUser by fetching the current user from UserInformationServlet.
+ * If the user is not logged in, the fetch will have a 400 response code and the cachedUser will be defined as null
+ * Otherwise the cachedUser will be defined as the current User object
  */
-async function initGetCurrentUser() {
+async function defineCurrentUserCache() {
   response = await fetch('/userInfo');
-  if(response.ok) {
+  if(response.ok){
     user = await response.json();
-    getCurrentUser.currentUser = user;
-    getCurrentUser.initalized = true;
+    getCurrentUser.cachedUser = user;
   } else {
-    getCurrentUser.currentUser = null;
-    getCurrentUser.initalized = true;
+    getCurrentUser.cachedUser = null;
   }
 }
 
@@ -33,11 +32,10 @@ async function initGetCurrentUser() {
  * If no user is logged in, return null
  */
 async function getCurrentUser() {
-  if(getCurrentUser.initalized === true){
-    return getCurrentUser.currentUser;
+  if(getCurrentUser.cachedUser === undefined){
+    await defineCurrentUserCache();
   }
-  await initGetCurrentUser();
-  return getCurrentUser.currentUser;
+  return getCurrentUser.cachedUser;
 }
 
 async function isUserLoggedIn() {
