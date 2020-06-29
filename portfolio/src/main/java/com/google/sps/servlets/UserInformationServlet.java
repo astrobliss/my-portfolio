@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserInformationServlet extends HttpServlet {
   private static final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   private static Gson gson = new Gson();
-  private static final List<String> userPropertyNames = Arrays.asList("displayName", "email");
+  private static final List<String> userPropertyNames = Arrays.asList("display-name", "email");
   private static final UserService userService = UserServiceFactory.getUserService();
 
   /**
@@ -119,7 +119,7 @@ public class UserInformationServlet extends HttpServlet {
   /**
    * Queries Datastore for a User Entity with the given Id, returns null if no match
    */
-  private Entity getUserEntity(String userId) {
+  public static Entity getUserEntity(String userId) {
     Query query =
         new Query("User")
             .setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, userId));
@@ -133,7 +133,7 @@ public class UserInformationServlet extends HttpServlet {
    */
   private String getRequestParameter(String parameterName, HttpServletRequest request, String defaultValue) {
     String parameterValue = request.getParameter(parameterName);
-    if(parameterValue == null) {
+    if(parameterValue == null || parameterValue.isEmpty()) {
         return defaultValue;
     } else {
       return parameterValue;

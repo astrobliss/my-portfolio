@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Serif+Pro&display=swap" rel="stylesheet">
     <script src="script.js"></script>
   </head>
-  <body onload="addComments()">
+  <body onload="addComments(); showLoginBasedContent();">
     <div id="content">
       <img id="reggie-photo" src="images/Reggie.jpg" alt="A photo of me!" class="center">
       <h1>Hey, I'm Reginald Frank</h1>
@@ -26,20 +26,25 @@
       <div id="text-container"><a id="link-container"></a></div>
     </div>
     <div id="comments" class="center">
-      <h2>Change User Data:</h2>
-      <form action="/userInfo" method="POST">
-        <input type="text" name="displayName">astro</input>
-        <br/><br/>
-        <input type="submit" value="Post Comment!"/>
-      </form>
-    </div>
-    <div id="comments" class="center">
       <h2>Comments:</h2>
-      <form action="/data" method="POST">
-        <textarea name="comment-text">Enter a comment!</textarea>
-        <br/><br/>
-        <input type="submit" value="Post Comment!"/>
-      </form>
+      <div id="comment-posting" class="show-logged-in">
+        <!-- TODO show user what account is logged in -->
+        <a href="/setUserInfo.html">Edit Account</a>
+        or
+        <a href="/logout">Logout</a>
+        if you don't want to change your current account.
+        <form action="/data" method="POST">
+          <textarea name="comment-text">Enter a comment!</textarea>
+          <br/><br/>
+          <input type="submit" value="Post Comment!"/>
+        </form>
+      </div>
+      <div id="comment-login" class="show-logged-out">
+        <a href="/login">Login</a>
+        or
+        <a href="/login?destination-url=/setUserInfo.html">Create Account</a>
+        to Post a Comment!
+      </div>
     </div>
   </body>
 </html>
